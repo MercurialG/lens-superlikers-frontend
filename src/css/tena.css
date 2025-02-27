@@ -1,0 +1,37 @@
+html {
+  background-color: #e7ebf2;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+header img {
+  max-width: 120px;
+}
+
+.status-display {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.result-display {
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  background-color: white;
+}
+
+.scan-btn.scan {
+  background: #022576;
+}
+
+.scan-btn.scan:hover {
+  background: rgba(2, 37, 118, 0.8);
+}
