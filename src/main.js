@@ -6,11 +6,15 @@ import { ScannerApp } from './utils/scanner'
 const init = async () => {
   const params = new URLSearchParams(window.location.search)
   const campaign = params.get('campaign')
-
-  if (!campaign) return
+  const uid = params.get('uid')
 
   const microsite = MICROSITES[campaign]
   await loadMicrositeContent(microsite)
+
+  if (!campaign || !uid) {
+    window.location = microsite.url
+    return
+  }
 
   const scannerApp = new ScannerApp(microsite.clientId)
 

@@ -1,9 +1,11 @@
 import VeryfiLens from 'veryfi-lens-wasm'
+import { createSpinner } from '../components/spinner'
+import { processDocument } from './process-document'
+import { printError } from './handle-messages'
 
 export class ScannerApp {
   constructor (clientId) {
     this.statusDisplay = document.getElementById('status-display')
-    this.resultDisplay = document.getElementById('result-display')
     this.clientId = clientId
 
     this.captureDocument = null
@@ -20,7 +22,11 @@ export class ScannerApp {
         isDocumentModal: true,
         exitButton: true,
         enableSubmit: false,
-        enableLongReceiptPreview: flavor === 'long_document'
+        enableLongReceiptPreview: flavor === 'long_document',
+        documentModalMessage: 'No se encontró ningún documento en la imagen, por favor intenta de nuevo',
+        blurModalMessage: 'La imagen está demasiado borrosa, por favor intenta de nuevo',
+        retakeButtonText: 'Reintentar',
+        submitButtonText: 'Enviar de todas formas'
       })
 
       this.setupEventHandlers()
@@ -56,20 +62,8 @@ export class ScannerApp {
     this.statusDisplay.textContent = message
   }
 
-  displayResult (result) {
-    this.resultDisplay.innerHTML = `
-     <h3>Scan Result:</h3>
-     <pre>${JSON.stringify(result, null, 2)}</pre>
-   `
-  }
-
   handleError (context, error) {
-    console.error(`${context}:`, error)
-    this.statusDisplay.innerHTML = `
-     <div class="error">
-       ${context}: ${error.message}
-     </div>
-   `
+    printError(context, error)
   }
 
   initializeEventListeners () {
@@ -87,7 +81,7 @@ export class ScannerApp {
 
     const submitButton = originalButton.cloneNode()
     submitButton.style.display = 'block'
-    submitButton.innerHTML = 'Submit'
+    submitButton.textContent = 'Submit'
 
     overlay.appendChild(submitButton)
 
@@ -99,7 +93,16 @@ export class ScannerApp {
     })
   }
 
-  submitDocument (deviceData, document) {
-    console.log({ deviceData, document })
+  async submitDocument (deviceData, document) {
+    VeryfiLens.stop()
+
+    const spinner = createSpinner(window.document.body, 'Subiendo el documento...')
+    spinner.show()
+
+    try {
+      await processDocument(deviceData, document)
+    } finally {
+      spinner.hide()
+    }
   }
 }

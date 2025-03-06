@@ -7,12 +7,14 @@ export const MICROSITES = {
   sz: {
     id: 'tena',
     clientId: VITE_VERYFI_CLIENT_ID_TENA,
-    autoStart: true,
+    url: 'https://www.circulotena.com.mx/',
+    autoStart: false,
     defaultType: 'document'
   },
   ua: {
     id: 'saba',
     clientId: VITE_VERYFI_CLIENT_ID_SABA,
+    url: 'https://sabaclub.com.mx/',
     autoStart: false
   }
 }
