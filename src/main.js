@@ -19,7 +19,7 @@ const init = async () => {
   const scannerApp = new ScannerApp(microsite.clientId)
 
   if (microsite.autoStart && microsite.defaultType) {
-    scannerApp.initializeScanner(microsite.defaultType)
+    await scannerApp.initializeScanner(microsite.defaultType)
   }
 }
 
