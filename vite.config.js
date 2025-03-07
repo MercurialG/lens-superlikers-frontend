@@ -1,19 +1,11 @@
 import { defineConfig } from 'vite'
-import fs from 'fs'
-import path from 'path'
 
-export default defineConfig(({ command, mode }) => ({
+export default defineConfig({
   server: {
     headers: {
       'Cross-Origin-Embedder-Policy': 'require-corp',
       'Cross-Origin-Opener-Policy': 'same-origin'
-    },
-    https: command === 'serve' && mode !== 'production'
-      ? {
-          key: fs.readFileSync(path.resolve(__dirname, 'localhost-key.pem')),
-          cert: fs.readFileSync(path.resolve(__dirname, 'localhost.pem'))
-        }
-      : false
+    }
   },
   optimizeDeps: {
     esbuildOptions: {
@@ -22,4 +14,4 @@ export default defineConfig(({ command, mode }) => ({
       }
     }
   }
-}))
+})

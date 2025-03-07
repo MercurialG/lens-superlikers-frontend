@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview",
-    "start": "serve --config serve.json"
+    "preview": "vite preview"
   },
   "devDependencies": {
     "standard": "^17.1.2",
