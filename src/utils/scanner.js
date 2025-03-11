@@ -22,6 +22,7 @@ export class ScannerApp {
         isDocumentModal: true,
         exitButton: true,
         enableSubmit: false,
+        debug_mode: true,
         enableLongReceiptPreview: flavor === 'long_document',
         documentModalMessage: 'No se encontró ningún documento en la imagen, por favor intenta de nuevo',
         blurModalMessage: 'La imagen está demasiado borrosa, por favor intenta de nuevo',
