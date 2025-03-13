@@ -7,8 +7,7 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview",
-    "start": "serve -s dist -l $PORT"
-    
+    "start": "node server.js"
   },
   "devDependencies": {
     "standard": "^17.1.2",
@@ -16,7 +15,7 @@
   },
   "dependencies": {
     "axios": "^1.8.1",
-    "serve": "^14.2.4",
+    "express": "^4.21.2",
     "veryfi-lens-wasm": "^2.0.5"
   },
   "eslintConfig": {

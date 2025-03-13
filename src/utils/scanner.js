@@ -21,7 +21,7 @@ export class ScannerApp {
         blurModal: true,
         isDocumentModal: true,
         exitButton: true,
-        enableSubmit: false,
+        enableSubmit: true,
         debug_mode: true,
         enableLongReceiptPreview: flavor === 'long_document',
         documentModalMessage: 'No se encontró ningún documento en la imagen, por favor intenta de nuevo',
@@ -35,10 +35,10 @@ export class ScannerApp {
       this.updateStatus('Scanner initialized')
 
       await VeryfiLens.showCamera((item) => {
-        if (item.image) {
-          setTimeout(() => this.createSubmitButton(), 0)
-          this.captureDocument = item.image
-        }
+        // if (item.image) {
+        //   setTimeout(() => this.createSubmitButton(), 0)
+        //   this.captureDocument = item.image
+        // }
       })
     } catch (error) {
       this.handleError('Initialization failed', error)
